@@ -5,11 +5,11 @@ export function BananaPlant(props) {
   const { nodes, materials } = useGLTF('/bananaPlant.glb')
   return (
     <group {...props} dispose={null}>
-      <group position={[0.004, 0, -0.006]} scale={1.849}>
+      <group position={[0, 0, 0]} scale={2.5}>
         <group
-          position={[0.009, 0.062, 0.136]}
+          position={[0, -0.2, 0.25]} 
           rotation={[Math.PI / 2, 0, -0.044]}
-          scale={[-0.01, 0.01, 0.01]}>
+          scale={[-0.02, 0.02, 0.02]}>
           <mesh
             castShadow
             receiveShadow
@@ -24,9 +24,9 @@ export function BananaPlant(props) {
           />
         </group>
         <group
-          position={[-0.03, 0.673, -0.069]}
+          position={[-0.03, 0.7, -0.07]} 
           rotation={[1.378, -0.045, 1.897]}
-          scale={[-0.024, 0.024, 0.024]}>
+          scale={[-0.034, 0.034, 0.034]}>
           <mesh
             castShadow
             receiveShadow
@@ -51,4 +51,4 @@ export function BananaPlant(props) {
   )
 }
 
-useGLTF.preload('/bananPlant.glb')
+useGLTF.preload('/bananaPlant.glb')
