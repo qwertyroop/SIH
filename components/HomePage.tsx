@@ -123,7 +123,7 @@ export default function HerbalPlantExplorer() {
       {/* Main Content Area */}
       <div className="w-4/5 flex flex-col">
         {/* Upper half for 3D model view */}
-        <div className="h-3/5 border-b border-green-200 p-4 flex flex-col items-center justify-center bg-gradient-to-b from-green-100 to-green-50 relative">
+        <div className="h-3/4 border-b border-green-200 p-4 flex flex-col items-center justify-center bg-gradient-to-b from-green-100 to-green-50 relative">
           <Canvas>
             <PerspectiveCamera makeDefault position={[0, 0, 5]} />
             <OrbitControls />
@@ -132,7 +132,7 @@ export default function HerbalPlantExplorer() {
             <pointLight position={[10, 10, 10]} intensity={1} />
             {selectedPlant && <PlantModel plantName={selectedPlant.name} zoom={zoom} rotation={rotation} />}
           </Canvas>
-          <div className="absolute bottom-4 left-4 right-4 flex justify-center space-x-4">
+          {/* <div className="absolute bottom-4 left-4 right-4 flex justify-center space-x-4">
             <Button variant="outline" size="icon" onClick={() => setZoom(Math.min(zoom + 0.1, 2))}>
               <ZoomIn className="h-4 w-4" />
             </Button>
@@ -150,11 +150,11 @@ export default function HerbalPlantExplorer() {
               <RotateCcw className="h-4 w-4" />
             </Button>
             
-          </div>
+          </div> */}
         </div>
 
         {/* Lower half for plant details and map */}
-        <ScrollArea className="h-2/5 bg-white">
+        <ScrollArea className="h-1/4 bg-white">
           <div className="p-6">
             {selectedPlant ? (
               <div>

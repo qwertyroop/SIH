@@ -1,10 +1,10 @@
+import LandingPage from '@/components/LandingPage'
 import React from 'react'
-import HerbalPlantExplorer from '@/components/HomePage'
 
 const page = () => {
   return (
     <>
-      <HerbalPlantExplorer />
+      <LandingPage />
     </>
   )
 }
