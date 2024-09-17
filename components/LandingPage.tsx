@@ -11,7 +11,6 @@ import {
   Pill,
 } from "lucide-react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Forest } from "@/components/Plants/forestLanding";
 import { Environment, OrbitControls, Sky } from "@react-three/drei";
 import * as THREE from "three";
 import Link from "next/link";
@@ -259,7 +258,7 @@ function RotatingForest() {
 
   return (
     <group ref={forestRef}>
-      <Forest />
+      
     </group>
   );
 }

@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "Plants/banana.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "Plants/banana.js", "pages/api/markers.ts", "components/Plants/allPlants.js"],
   "exclude": ["node_modules"]
 }
