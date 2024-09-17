@@ -194,99 +194,389 @@ export function TulsiPlant(props) {
 export function Oak(props) {
     const { nodes, materials } = useGLTF('/Oak.glb')
     return (
-      <group {...props} dispose={null}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_11.geometry}
-          material={materials.bark}
-          position={[0, 0, 125.087]}
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={[1, 1, 1.137]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_13.geometry}
-          material={materials.foliage}
-          position={[0, 0, 125.087]}
-          rotation={[Math.PI / 2, 0, 0]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_5002.geometry}
-          material={materials['material.002']}
-          position={[-0.883, -1.791, 133.578]}
-          rotation={[Math.PI / 2, 0, -0.044]}
-          scale={[-0.58, 0.58, 0.58]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_6.geometry}
-          material={materials['material_1.002']}
-          position={[-0.883, -1.791, 133.578]}
-          rotation={[Math.PI / 2, 0, -0.044]}
-          scale={[-0.58, 0.58, 0.58]}
-        />
-      </group>
+        <group {...props} dispose={null}>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Object_11.geometry}
+                material={materials.bark}
+                position={[0, 0, 125.087]}
+                rotation={[Math.PI / 2, 0, 0]}
+                scale={[1, 1, 1.137]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Object_13.geometry}
+                material={materials.foliage}
+                position={[0, 0, 125.087]}
+                rotation={[Math.PI / 2, 0, 0]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Object_5002.geometry}
+                material={materials['material.002']}
+                position={[-0.883, -1.791, 133.578]}
+                rotation={[Math.PI / 2, 0, -0.044]}
+                scale={[-0.58, 0.58, 0.58]}
+            />
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Object_6.geometry}
+                material={materials['material_1.002']}
+                position={[-0.883, -1.791, 133.578]}
+                rotation={[Math.PI / 2, 0, -0.044]}
+                scale={[-0.58, 0.58, 0.58]}
+            />
+        </group>
     )
-  }
-  
-  export function Model(props) {
-    const { nodes, materials } = useGLTF('/compressed.glb')
-    return (
-      <group {...props} dispose={null}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_Material002_0.geometry}
-          material={materials.PaletteMaterial001}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_Material003_0.geometry}
-          material={materials.PaletteMaterial001}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube001_Material004_0.geometry}
-          material={materials.PaletteMaterial001}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Cube_Material001_0.geometry}
-          material={materials['Material.003']}
-          position={[-0.019, 0.972, -0.011]}
-          rotation={[-Math.PI / 2, 0, 0]}
-          scale={0.096}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_5.geometry}
-          material={materials['material.001']}
-          position={[0.006, 0.1, 0.269]}
-          rotation={[Math.PI / 2, 0, -0.044]}
-          scale={[-0.019, 0.019, 0.019]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_6.geometry}
-          material={materials['material_1.001']}
-          position={[0.006, 0.1, 0.269]}
-          rotation={[Math.PI / 2, 0, -0.044]}
-          scale={[-0.019, 0.019, 0.019]}
-        />
-      </group>
-    )
-  }
+}
 
+
+export function Bacopa(props) {
+    const { nodes, materials } = useGLTF('/Bacopa.glb')
+    return (
+        <group {...props} dispose={null}>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Mesh_0006.geometry}
+                material={materials['Material_0.006']}
+                position={[0.518, 0.572, 0.545]}
+                rotation={[-0.028, 0.11, -0.008]}
+                scale={0.432}
+            />
+            <group position={[0.497, -0.313, 0.587]} rotation={[-Math.PI / 2, 0, 0]}>
+                <group rotation={[Math.PI / 2, 0, 0]}>
+                    <group position={[0.004, 0, -0.006]} scale={1.849}>
+                        <group
+                            position={[0.009, 0.062, 0.136]}
+                            rotation={[-Math.PI / 2, 0, 0.044]}
+                            scale={-0.01}>
+                            <mesh
+                                castShadow
+                                receiveShadow
+                                geometry={nodes.Object_5.geometry}
+                                material={materials['material.002']}
+                                position={[-0.059, 3.225, -0.403]}
+                                scale={1.351}
+                            />
+                            <mesh
+                                castShadow
+                                receiveShadow
+                                geometry={nodes.Object_6.geometry}
+                                material={materials['material_1.002']}
+                            />
+                        </group>
+                    </group>
+                </group>
+            </group>
+        </group>
+    )
+}
+
+
+export function Basill(props) {
+    const { nodes, materials } = useGLTF('/Basill.glb')
+    return (
+        <group {...props} dispose={null}>
+            <group position={[0.497, -0.313, 0.587]} rotation={[-Math.PI / 2, 0, 0]}>
+                <group rotation={[Math.PI / 2, 0, 0]}>
+                    <group position={[0.004, 0, -0.006]} scale={1.849}>
+                        <group
+                            position={[0.009, 0.062, 0.136]}
+                            rotation={[-Math.PI / 2, 0, 0.044]}
+                            scale={-0.01}>
+                            <mesh
+                                castShadow
+                                receiveShadow
+                                geometry={nodes.Object_5.geometry}
+                                material={materials['material.002']}
+                                position={[-0.059, 3.225, -0.403]}
+                                scale={1.351}
+                            />
+                            <mesh
+                                castShadow
+                                receiveShadow
+                                geometry={nodes.Object_6.geometry}
+                                material={materials['material_1.002']}
+                                scale={1.307}
+                            />
+                        </group>
+                    </group>
+                </group>
+            </group>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Mesh_0009.geometry}
+                material={materials['Material_0.009']}
+                position={[0.484, 0.414, 0.625]}
+                scale={0.505}
+            />
+        </group>
+    )
+}
+
+export function Fatboi(props) {
+    const { nodes, materials } = useGLTF('/FAtboiglb.glb')
+    return (
+        <group {...props} dispose={null}>
+            <group position={[0.594, -0.222, 2.383]} rotation={[-Math.PI / 2, 0, 0]}>
+                <group rotation={[Math.PI / 2, 0, 0]}>
+                    <group position={[0.004, 0, -0.006]} scale={1.849}>
+                        <group
+                            position={[-0.56, 0.039, -1.075]}
+                            rotation={[-Math.PI / 2, 0, 0.044]}
+                            scale={-0.01}>
+                            <mesh
+                                castShadow
+                                receiveShadow
+                                geometry={nodes.Object_5.geometry}
+                                material={materials['material.002']}
+                                position={[-0.059, 3.225, -0.403]}
+                                scale={1.351}
+                            />
+                            <mesh
+                                castShadow
+                                receiveShadow
+                                geometry={nodes.Object_6.geometry}
+                                material={materials['material_1.002']}
+                                scale={1.307}
+                            />
+                        </group>
+                    </group>
+                </group>
+            </group>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Mesh_0020.geometry}
+                material={materials['Material_0.020']}
+                position={[-0.56, 0.644, 0.192]}
+                scale={0.891}
+            />
+        </group>
+    )
+}
+export function KingOfBitters(props) {
+    const { nodes, materials } = useGLTF('/King of bitters.glb')
+    return (
+        <group {...props} dispose={null}>
+            <group position={[0.497, -0.313, 0.587]} rotation={[-Math.PI / 2, 0, 0]}>
+                <group rotation={[Math.PI / 2, 0, 0]}>
+                    <group position={[0.004, 0, -0.006]} scale={1.849}>
+                        <group
+                            position={[0.009, 0.062, 0.136]}
+                            rotation={[-Math.PI / 2, 0, 0.044]}
+                            scale={-0.01}>
+                            <mesh
+                                castShadow
+                                receiveShadow
+                                geometry={nodes.Object_5.geometry}
+                                material={materials['material.002']}
+                                position={[-0.059, 3.225, -0.403]}
+                                scale={1.351}
+                            />
+                            <mesh
+                                castShadow
+                                receiveShadow
+                                geometry={nodes.Object_6.geometry}
+                                material={materials['material_1.002']}
+                                scale={1.307}
+                            />
+                        </group>
+                    </group>
+                </group>
+            </group>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Mesh_0011.geometry}
+                material={materials['Material_0.011']}
+                position={[0.662, 0.959, 0.442]}
+            />
+        </group>
+    )
+}
+
+export function LantanaBloussum(props) {
+    const { nodes, materials } = useGLTF('/Lantana Bloussum.glb')
+    return (
+        <group {...props} dispose={null}>
+            <group position={[0.594, -0.222, 2.383]} rotation={[-Math.PI / 2, 0, 0]}>
+                <group rotation={[Math.PI / 2, 0, 0]}>
+                    <group position={[0.004, 0, -0.006]} scale={1.849}>
+                        <group
+                            position={[-0.56, 0.039, -1.075]}
+                            rotation={[-Math.PI / 2, 0, 0.044]}
+                            scale={-0.01}>
+                            <mesh
+                                castShadow
+                                receiveShadow
+                                geometry={nodes.Object_5.geometry}
+                                material={materials['material.002']}
+                                position={[-0.059, 3.225, -0.403]}
+                                scale={1.351}
+                            />
+                            <mesh
+                                castShadow
+                                receiveShadow
+                                geometry={nodes.Object_6.geometry}
+                                material={materials['material_1.002']}
+                                scale={1.307}
+                            />
+                        </group>
+                    </group>
+                </group>
+            </group>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Mesh_0019.geometry}
+                material={materials['Material_0.019']}
+                position={[-0.147, 1.049, 0.403]}
+            />
+        </group>
+    )
+}
+export function Poovarshu(props) {
+    const { nodes, materials } = useGLTF('/poovarshu.glb')
+    return (
+        <group {...props} dispose={null}>
+            <group position={[0.594, -0.222, 2.383]} rotation={[-Math.PI / 2, 0, 0]}>
+                <group rotation={[Math.PI / 2, 0, 0]}>
+                    <group position={[0.004, 0, -0.006]} scale={1.849}>
+                        <group
+                            position={[-0.56, 0.039, -1.075]}
+                            rotation={[-Math.PI / 2, 0, 0.044]}
+                            scale={-0.01}>
+                            <mesh
+                                castShadow
+                                receiveShadow
+                                geometry={nodes.Object_5.geometry}
+                                material={materials['material.002']}
+                                position={[-0.059, 3.225, -0.403]}
+                                scale={1.351}
+                            />
+                            <mesh
+                                castShadow
+                                receiveShadow
+                                geometry={nodes.Object_6.geometry}
+                                material={materials['material_1.002']}
+                                scale={1.307}
+                            />
+                        </group>
+                    </group>
+                </group>
+            </group>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Mesh_0018.geometry}
+                material={materials['Material_0.018']}
+                position={[-0.624, 0.87, 0.089]}
+            />
+        </group>
+    )
+}
+
+export function Thumba(props) {
+    const { nodes, materials } = useGLTF('/Thumba_.glb')
+    return (
+        <group {...props} dispose={null}>
+            <group position={[0.594, -0.222, 2.383]} rotation={[-Math.PI / 2, 0, 0]}>
+                <group rotation={[Math.PI / 2, 0, 0]}>
+                    <group position={[0.004, 0, -0.006]} scale={1.849}>
+                        <group
+                            position={[-0.56, 0.039, -1.075]}
+                            rotation={[-Math.PI / 2, 0, 0.044]}
+                            scale={-0.01}>
+                            <mesh
+                                castShadow
+                                receiveShadow
+                                geometry={nodes.Object_5.geometry}
+                                material={materials['material.002']}
+                                position={[-0.059, 3.225, -0.403]}
+                                scale={1.351}
+                            />
+                            <mesh
+                                castShadow
+                                receiveShadow
+                                geometry={nodes.Object_6.geometry}
+                                material={materials['material_1.002']}
+                                scale={1.307}
+                            />
+                        </group>
+                    </group>
+                </group>
+            </group>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Mesh_0017.geometry}
+                material={materials['Material_0.017']}
+                position={[-0.462, 1.086, 0.102]}
+            />
+        </group>
+    )
+}
+
+
+export function WithaniaSomnifera(props) {
+    const { nodes, materials } = useGLTF('/Withania_Somnifera_.glb')
+    return (
+        <group {...props} dispose={null}>
+            <group position={[0.497, -0.313, 0.587]} rotation={[-Math.PI / 2, 0, 0]}>
+                <group rotation={[Math.PI / 2, 0, 0]}>
+                    <group position={[0.004, 0, -0.006]} scale={1.849}>
+                        <group
+                            position={[0.009, 0.062, 0.136]}
+                            rotation={[-Math.PI / 2, 0, 0.044]}
+                            scale={-0.01}>
+                            <mesh
+                                castShadow
+                                receiveShadow
+                                geometry={nodes.Object_5.geometry}
+                                material={materials['material.002']}
+                                position={[-0.059, 3.225, -0.403]}
+                                scale={1.351}
+                            />
+                            <mesh
+                                castShadow
+                                receiveShadow
+                                geometry={nodes.Object_6.geometry}
+                                material={materials['material_1.002']}
+                                scale={1.307}
+                            />
+                        </group>
+                    </group>
+                </group>
+            </group>
+            <mesh
+                castShadow
+                receiveShadow
+                geometry={nodes.Mesh_0002.geometry}
+                material={materials['Material_0.012']}
+                position={[0.423, 0.734, 0.545]}
+            />
+        </group>
+    )
+}
+
+useGLTF.preload('/Withania_Somnifera_.glb')
+
+useGLTF.preload('/Thumba_.glb')
+
+useGLTF.preload('/poovarshu.glb')
+useGLTF.preload('/Lantana Bloussum.glb')
+useGLTF.preload('/King of bitters.glb')
+useGLTF.preload('/FAtboiglb.glb')
+
+useGLTF.preload('/Basill.glb')
+useGLTF.preload('/Bacopa.glb')
 useGLTF.preload('/bananaPlant.glb')
 useGLTF.preload('/tulsi.glb')
 useGLTF.preload('/Oak.glb')

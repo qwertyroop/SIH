@@ -126,6 +126,14 @@ const plantComponents: { [key: string]: React.ComponentType<any> } = {
   Pine: Plants.PinePlant,
   Tulsi: Plants.TulsiPlant,
   Oak : Plants.Oak,
+  Bacopa: Plants.Bacopa,
+  Basill: Plants.Basill,
+  Fatboi: Plants.Fatboi,
+  KingOfBitters : Plants.KingOfBitters,
+  LantanaBloussum : Plants.LantanaBloussum,
+  Poovarshu : Plants.Poovarshu,
+  Thumba : Plants.Thumba,
+  WithaniaSomnifera: Plants.WithaniaSomnifera,
 
 };
 

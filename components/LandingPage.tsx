@@ -99,16 +99,14 @@ export default function LandingPage() {
       </header>
 
       {/* Hero Section */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className=" mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="relative rounded-lg overflow-hidden mb-4 ">
-          {/* <h1 className="text-[10rem] font-bold text-black  text-center">
-            AYUSH
-          </h1> */}
+          
+
           <p className="text-[#508023] text-center font-bold text-2xl -mb-8">
             AYUSH
           </p>
-                <FlipWordsDemo />
-
+          <FlipWordsDemo />
           <p className="text-gray-600 text-center mb-1">
             Virtual Herbal Garden, Now in the Browser.
           </p>
@@ -122,10 +120,11 @@ export default function LandingPage() {
             />
           </center>
         </div>
-        <FloatingDockDemo/>
-
+        <FloatingDockDemo />
       </main>
-
+      <h1 className="text-[5rem] font-bold text-black  text-center">
+            FEATURES
+          </h1>
       {/* Features Section */}
       <div className="mt-20 px-10">
         <h2 className="text-3xl font-bold mb-6">Explore Our Features</h2>
