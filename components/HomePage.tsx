@@ -10,6 +10,9 @@ import { Slider } from "@/components/ui/slider"
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { BananaPlant } from '@/components/Plants/banana'
+import dynamic from 'next/dynamic'
+
+const Map = dynamic(() => import('../components/map/map'), { ssr: false });
 
 interface Plant {
   id: number;
@@ -63,19 +66,42 @@ function PlantModel({ plantName, zoom, rotation }: { plantName: string, zoom: nu
 }
 
 export default function HerbalPlantExplorer() {
-  const [selectedPlant, setSelectedPlant] = useState<Plant | null>(null)
+  const [selectedPlant, setSelectedPlant] = useState<Plant | null>(mockPlants.find(plant => plant.name === 'Banana') || null);
   const [searchTerm, setSearchTerm] = useState('')
   const [zoom, setZoom] = useState(1)
   const [rotation, setRotation] = useState(0)
-
+  const [modelViewHeight, setModelViewHeight] = useState(75) // Initial height percentage
+  const [isDragging, setIsDragging] = useState(false)
 
   const filteredPlants = mockPlants.filter(plant => 
     plant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     plant.category.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
+  const handleMouseDown = () => {
+    setIsDragging(true)
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging) {
+      const containerHeight = e.currentTarget.clientHeight
+      const newHeight = (e.clientY / containerHeight) * 100
+      setModelViewHeight(Math.min(Math.max(newHeight, 20), 80)) // Limit between 20% and 80%
+    }
+  }
+
+  useEffect(() => {
+    const handleGlobalMouseUp = () => setIsDragging(false)
+    window.addEventListener('mouseup', handleGlobalMouseUp)
+    return () => window.removeEventListener('mouseup', handleGlobalMouseUp)
+  }, [])
+
   return (
-    <div className="flex h-screen bg-green-50 text-green-900">
+    <div className="flex h-screen bg-green-50 text-green-900 overflow-hidden">
       {/* Sidebar */}
       <div className="w-1/5 bg-green-100 shadow-lg overflow-hidden flex flex-col">
         <div className="p-6 bg-green-200">
@@ -121,9 +147,15 @@ export default function HerbalPlantExplorer() {
       </div>
 
       {/* Main Content Area */}
-      <div className="w-4/5 flex flex-col">
+      <div 
+        className="w-4/5 flex flex-col relative" 
+        onMouseMove={handleMouseMove}
+      >
         {/* Upper half for 3D model view */}
-        <div className="h-3/4 border-b border-green-200 p-4 flex flex-col items-center justify-center bg-gradient-to-b from-green-100 to-green-50 relative">
+        <div 
+          className="border-b border-green-200 flex flex-col items-center justify-center bg-gradient-to-b from-green-100 to-green-50 relative"
+          style={{ height: `${modelViewHeight}%` }}
+        >
           <Canvas>
             <PerspectiveCamera makeDefault position={[0, 0, 5]} />
             <OrbitControls />
@@ -132,11 +164,11 @@ export default function HerbalPlantExplorer() {
             <pointLight position={[10, 10, 10]} intensity={1} />
             {selectedPlant && <PlantModel plantName={selectedPlant.name} zoom={zoom} rotation={rotation} />}
           </Canvas>
-          {/* <div className="absolute bottom-4 left-4 right-4 flex justify-center space-x-4">
-            <Button variant="outline" size="icon" onClick={() => setZoom(Math.min(zoom + 0.1, 2))}>
+          <div className="absolute bottom-4 left-4 right-4 flex justify-center space-x-4">
+            <Button variant="outline" className='bg-white' size="icon" onClick={() => setZoom(Math.min(zoom + 0.1, 2))}>
               <ZoomIn className="h-4 w-4" />
             </Button>
-            <Button variant="outline" size="icon" onClick={() => setZoom(Math.max(zoom - 0.1, 0.5))}>
+            <Button variant="outline" className='bg-white' size="icon" onClick={() => setZoom(Math.max(zoom - 0.1, 0.5))}>
               <ZoomOut className="h-4 w-4" />
             </Button>
             <Slider
@@ -146,15 +178,26 @@ export default function HerbalPlantExplorer() {
               step={0.1}
               className="w-32"
             />
-            <Button variant="outline" size="icon" onClick={() => setRotation(0)}>
+            <Button variant="outline" className='bg-white' size="icon" onClick={() => setRotation(0)}>
               <RotateCcw className="h-4 w-4" />
             </Button>
-            
-          </div> */}
+          </div>
+        </div>
+
+        {/* Draggable divider */}
+        <div 
+          className="h-2 bg-green-200 cursor-ns-resize flex items-center justify-center"
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+        >
+          <div className="w-10 h-1 bg-green-400 rounded-full"></div>
         </div>
 
         {/* Lower half for plant details and map */}
-        <ScrollArea className="h-1/4 bg-white">
+        <ScrollArea 
+          className="bg-white flex-grow p-10"
+          style={{ height: `calc(${100 - modelViewHeight}% - 0.5rem)` }}
+        >
           <div className="p-6">
             {selectedPlant ? (
               <div>
@@ -167,8 +210,8 @@ export default function HerbalPlantExplorer() {
                   <div>
                     <h3 className="text-xl font-semibold mb-2 text-green-700">Native Habitat</h3>
                     <p className="text-green-600">{selectedPlant.nativeHabitat}</p>
-                    <div className="mt-2 bg-green-50 h-40 flex items-center justify-center rounded-md border border-green-200">
-                      <p className="text-green-500">Map Placeholder</p>
+                    <div className="mt-5 bg-green-50 h-40 flex items-center justify-center rounded-md border border-green-200">
+                      <Map />
                     </div>
                   </div>
                 </div>

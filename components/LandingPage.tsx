@@ -14,6 +14,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Forest } from "@/components/Plants/forestLanding";
 import { Environment, OrbitControls, Sky } from "@react-three/drei";
 import * as THREE from "three";
+import Link from "next/link";
 const hemiLight = new THREE.HemisphereLight(0x0000ff, 0x00ff00, 0.6);
 
 type TabKey = "3D Models" | "Videos" | "Images" | "Audio Guides";
@@ -80,12 +81,17 @@ export default function LandingPage() {
         <div className="flex items-center space-x-4">
           <Search className="w-6 h-6" />
           <Book className="w-6 h-6" />
-          <button
+          <Link href="/explorer">
+            <button className="px-4 py-2 border border-white rounded-full">
+              Explore
+            </button>
+          </Link>
+          {/* <button
             type="button"
             className="px-4 py-2 border border-white rounded-full"
           >
             Log in
-          </button>
+          </button> */}
         </div>
       </nav>
 
