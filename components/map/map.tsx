@@ -22,6 +22,8 @@ const markerPositions = [
   { lat: 28.7041, lng: 77.1025, label: 'Delhi' },
 ];
 
+
+
 // Function to create bounds for rectangles
 const getBounds = (lat: number, lng: number, size = 0.05): L.LatLngBoundsLiteral => {
   return [

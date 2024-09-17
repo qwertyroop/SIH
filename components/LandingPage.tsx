@@ -14,8 +14,9 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, OrbitControls, Sky } from "@react-three/drei";
 import * as THREE from "three";
 import Link from "next/link";
-const hemiLight = new THREE.HemisphereLight(0x0000ff, 0x00ff00, 0.6);
-
+import Image from "next/image";
+import { FlipWordsDemo } from "./hero-words";
+import { FloatingDockDemo } from "@/components/dock";
 type TabKey = "3D Models" | "Videos" | "Images" | "Audio Guides";
 
 export default function LandingPage() {
@@ -52,66 +53,78 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="bg-[#1a2e1e] min-h-screen text-white font-sans">
+    <div className="bg-white min-h-screen text-white font-sans overflow-x-hidden">
       {/* Navigation */}
-      <nav className="flex justify-between items-center p-4">
-        <div className="flex items-center space-x-4">
-          <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-            <div className="w-6 h-6 bg-[#1a2e1e] rounded-full"></div>
+      <header className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+          <div className="flex items-center">
+            <Image
+              src="/placeholder.svg?height=40&width=40"
+              alt="IsoEnergy Logo"
+              width={40}
+              height={40}
+              className="mr-2"
+            />
+            <span className="text-xl font-semibold text-gray-900">
+              isoEnergy
+            </span>
           </div>
-          <div className="flex space-x-2">
-            <button
-              type="button"
-              className="bg-white text-[#1a2e1e] px-4 py-2 rounded-full"
-            >
+          <nav className="hidden md:flex space-x-6">
+            <a href="#" className="text-gray-500 hover:text-gray-900">
               Home
-            </button>
-            <button type="button" className="px-4 py-2">
-              Library
-            </button>
-            <button type="button" className="px-4 py-2">
-              Map
-            </button>
-            <button type="button" className="px-4 py-2">
-              About
-            </button>
-          </div>
+            </a>
+            <a href="#" className="text-gray-500 hover:text-gray-900">
+              Energy System
+            </a>
+            <a href="#" className="text-gray-500 hover:text-gray-900">
+              Topics
+            </a>
+            <a href="#" className="text-gray-500 hover:text-gray-900">
+              Countries
+            </a>
+            <a href="#" className="text-gray-500 hover:text-gray-900">
+              Data
+            </a>
+            <a href="#" className="text-gray-500 hover:text-gray-900">
+              Reports
+            </a>
+            <a href="#" className="text-gray-500 hover:text-gray-900">
+              Contact
+            </a>
+          </nav>
+          <button className="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 transition-colors">
+            Subscribe
+          </button>
         </div>
-        <div className="flex items-center space-x-4">
-          <Search className="w-6 h-6" />
-          <Book className="w-6 h-6" />
-          <Link href="/explorer">
-            <button className="px-4 py-2 border border-white rounded-full">
-              Explore
-            </button>
-          </Link>
-          {/* <button
-            type="button"
-            className="px-4 py-2 border border-white rounded-full"
-          >
-            Log in
-          </button> */}
-        </div>
-      </nav>
+      </header>
 
       {/* Hero Section */}
-      <div className="relative mt-20 px-10 h-[70vh]">
-        <Canvas shadows camera={{ position: [0, 15, 10], fov: 75 }}>
-          <ambientLight intensity={1} />
-          <pointLight position={[10, 10, 10]} intensity={1} />
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="relative rounded-lg overflow-hidden mb-4 ">
+          {/* <h1 className="text-[10rem] font-bold text-black  text-center">
+            AYUSH
+          </h1> */}
+          <p className="text-[#508023] text-center font-bold text-2xl -mb-8">
+            AYUSH
+          </p>
+                <FlipWordsDemo />
 
-          <RotatingForest />
+          <p className="text-gray-600 text-center mb-1">
+            Virtual Herbal Garden, Now in the Browser.
+          </p>
+          <center>
+            <Image
+              src="/plant1.png"
+              alt="Bio Energy Landscape"
+              width={1000}
+              height={800}
+              className="w-1/2 z-50"
+            />
+          </center>
+        </div>
+        <FloatingDockDemo/>
 
-          <mesh
-            rotation={[-Math.PI / 2, 0, 0]}
-            position={[0, -0.5, 0]}
-            receiveShadow
-          >
-            <planeGeometry args={[100, 100]} />
-            <shadowMaterial opacity={0.4} />
-          </mesh>
-        </Canvas>
-      </div>
+      </main>
 
       {/* Features Section */}
       <div className="mt-20 px-10">
@@ -256,9 +269,5 @@ function RotatingForest() {
     }
   });
 
-  return (
-    <group ref={forestRef}>
-      
-    </group>
-  );
+  return <group ref={forestRef}></group>;
 }

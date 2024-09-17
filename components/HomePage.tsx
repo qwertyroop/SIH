@@ -5,12 +5,6 @@ import * as THREE from "three";
 import {
   Search,
   Leaf,
-  Apple,
-  Flower2,
-  Wheat,
-  Sprout,
-  Sun,
-  Moon,
   ZoomIn,
   ZoomOut,
   RotateCcw,
@@ -33,10 +27,13 @@ const Map = dynamic(() => import("../components/map/map"), { ssr: false });
 interface Plant {
   id: number;
   name: string;
+  botanicalName: string;
+  commonNames: string;
+  methodOfCultivation: string;
   category: string;
-  icon: React.ComponentType<any>;
   description: string;
   nativeHabitat: string;
+  medicinalUsage: string;
   images: string[];
 }
 
@@ -44,71 +41,81 @@ const mockPlants: Plant[] = [
   {
     id: 1,
     name: "Banana",
+    botanicalName: "Musa acuminata",
+    commonNames: "Plantain, Cavendish",
+    methodOfCultivation: "Propagated through suckers or corms, thrives in warm, humid climates",
     category: "Fruit",
-    icon: Apple,
-    description:
-      "A tropical fruit known for its curved shape and yellow peel. Rich in potassium and vitamins.",
+    description: "A tropical fruit known for its curved shape and yellow peel. Rich in potassium and vitamins.",
     nativeHabitat: "Tropical regions of Southeast Asia",
+    medicinalUsage: "Used in traditional medicine for digestive issues and skin health (limited evidence)",
     images: [
-      "/placeholder.svg?height=200&width=200",
-      "/placeholder.svg?height=200&width=200",
-      "/placeholder.svg?height=200&width=200",
+      "https://unsplash.com/photos/image-of-banana-plant",
+      "https://unsplash.com/photos/image-of-ripe-banana",
+      "https://unsplash.com/photos/image-of-banana-peel"
     ],
   },
   {
     id: 2,
-    name: "Alovera",
-    category: "Herb",
-    icon: Sprout,
-    description:
-      "A daisy-like plant known for its calming properties. Often used in teas and aromatherapy.",
-    nativeHabitat: "Europe and Western Asia",
+    name: "Aloe Vera",
+    botanicalName: "Aloe barbadensis miller",
+    commonNames: "None",
+    methodOfCultivation: "Propagated through pups or offsets, thrives in hot, dry climates with good drainage",
+    category: "Succulent",
+    description: "A succulent plant known for its medicinal properties. Often used for skin care and wound healing.",
+    nativeHabitat: "Arabian Peninsula",
+    medicinalUsage: "Widely used for topical application to soothe burns, sunburns, and minor skin irritations (extensive research)",
     images: [
-      "/placeholder.svg?height=200&width=200",
-      "/placeholder.svg?height=200&width=200",
-      "/placeholder.svg?height=200&width=200",
+      "https://unsplash.com/photos/image-of-aloe-vera-plant",
+      "https://unsplash.com/photos/image-of-aloe-vera-gel",
+      "https://unsplash.com/photos/image-of-aloe-vera-leaves"
     ],
   },
   {
     id: 3,
     name: "Pine",
-    category: "Herb",
-    icon: Sprout,
-    description:
-      "A daisy-like plant known for its calming properties. Often used in teas and aromatherapy.",
-    nativeHabitat: "Europe and Western Asia",
+    botanicalName: "Pinus spp.",
+    commonNames: "Scots pine, Lodgepole pine, White pine",
+    methodOfCultivation: "Propagated through seeds, requires well-drained soil and full sun",
+    category: "Tree",
+    description: "A coniferous evergreen tree known for its tall stature and needle-like leaves. Often used for lumber and paper production.",
+    nativeHabitat: "Temperate regions of the Northern Hemisphere",
+    medicinalUsage: "Limited medicinal use, some pine species have potential respiratory benefits (ongoing research)",
     images: [
-      "/placeholder.svg?height=200&width=200",
-      "/placeholder.svg?height=200&width=200",
-      "/placeholder.svg?height=200&width=200",
+      "https://unsplash.com/photos/image-of-pine-forest",
+      "https://unsplash.com/photos/image-of-pine-cone",
+      "https://unsplash.com/photos/image-of-pine-needle"
     ],
   },
   {
     id: 4,
     name: "Tulsi",
+    botanicalName: "Ocimum tenuiflorum",
+    commonNames: "Holy basil",
+    methodOfCultivation: "Propagated through seeds or cuttings, prefers warm climates with moderate watering",
     category: "Herb",
-    icon: Sprout,
-    description:
-      "A daisy-like plant known for its calming properties. Often used in teas and aromatherapy.",
-    nativeHabitat: "Europe and Western Asia",
+    description: "A sacred plant in Hinduism, known for its medicinal properties and aromatic leaves. Often used in teas and Ayurvedic medicine.",
+    nativeHabitat: "Indian subcontinent",
+    medicinalUsage: "Used in Ayurvedic medicine for various ailments, potential benefits for stress, anxiety, and blood sugar control (ongoing research)",
     images: [
-      "/placeholder.svg?height=200&width=200",
-      "/placeholder.svg?height=200&width=200",
-      "/placeholder.svg?height=200&width=200",
+      "https://unsplash.com/photos/image-of-tulsi-plant",
+      "https://unsplash.com/photos/image-of-tulsi-leaves",
+      "https://unsplash.com/photos/image-of-tulsi-flowers"
     ],
   },
   {
     id: 5,
     name: "Oak",
-    category: "Herb",
-    icon: Sprout,
-    description:
-      "A daisy-like plant known for its calming properties. Often used in teas and aromatherapy.",
-    nativeHabitat: "Europe and Western Asia",
+    botanicalName: "Quercus spp.",
+    commonNames: "Red oak, White oak, Live oak",
+    methodOfCultivation: "Propagated through acorns, requires well-drained soil and full sun",
+    category: "Tree",
+    description: "A deciduous tree known for its strong, durable wood. Often used in construction and furniture making.",
+    nativeHabitat: "Temperate regions of the Northern Hemisphere",
+    medicinalUsage: "Limited medicinal use, some oak species have potential astringent properties (limited research)",
     images: [
-      "/placeholder.svg?height=200&width=200",
-      "/placeholder.svg?height=200&width=200",
-      "/placeholder.svg?height=200&width=200",
+      "https://unsplash.com/photos/image-of-oak-tree",
+      "https://unsplash.com/photos/image-of-oak-leaves",
+      "https://unsplash.com/photos/image-of-oak-acorn"
     ],
   },
 ];
@@ -158,7 +165,7 @@ export default function HerbalPlantExplorer() {
   const [searchTerm, setSearchTerm] = useState("");
   const [zoom, setZoom] = useState(1);
   const [rotation, setRotation] = useState(0);
-  const [modelViewHeight, setModelViewHeight] = useState(75); // Initial height percentage
+  const [modelViewHeight, setModelViewHeight] = useState(75); 
   const [isDragging, setIsDragging] = useState(false);
 
   const filteredPlants = mockPlants.filter(
@@ -190,16 +197,16 @@ export default function HerbalPlantExplorer() {
   }, []);
 
   return (
-    <div className="flex h-screen bg-green-50 text-green-900 overflow-hidden">
+    <div className="flex h-screen bg-white text-black overflow-hidden">
       {/* Sidebar */}
-      <div className="w-1/5 bg-green-100 shadow-lg overflow-hidden flex flex-col">
-        <div className="p-6 bg-green-200">
-          <h2 className="text-2xl font-bold text-green-800 flex items-center mb-6">
-            <Leaf className="mr-2 h-6 w-6 text-green-600" />
-            Herbal Plants
+      <div className="w-1/5 bg-white shadow-lg overflow-hidden flex flex-col">
+        <div className="p-6 bg-white">
+          <h2 className="text-2xl font-bold text-black flex items-center mb-6">
+            <Leaf className="mr-2 h-6 w-6 text-black" />
+            AYUSH
           </h2>
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-500" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-black" />
             <Input
               type="text"
               placeholder="Search plants..."
@@ -212,7 +219,7 @@ export default function HerbalPlantExplorer() {
         <ScrollArea className="flex-grow">
           <div className="p-6 pt-4">
             {filteredPlants.map((plant) => {
-              const IconComponent = plant.icon;
+              
               return (
                 <button
                   key={plant.id}
@@ -220,21 +227,15 @@ export default function HerbalPlantExplorer() {
                   className={`w-full text-left p-3 rounded-lg mb-2 transition-colors flex items-center
                               ${
                                 selectedPlant?.id === plant.id
-                                  ? "bg-green-200 text-green-800"
-                                  : "hover:bg-green-200 text-green-700"
+                                  ? "bg-white text-black"
+                                  : "hover:bg-green-200 text-black"
                               }`}
                   onClick={() => setSelectedPlant(plant)}
                 >
-                  <IconComponent
-                    className={`mr-3 h-5 w-5 ${
-                      selectedPlant?.id === plant.id
-                        ? "text-green-600"
-                        : "text-green-500"
-                    }`}
-                  />
+                  
                   <div>
                     <div className="font-medium">{plant.name}</div>
-                    <div className="text-sm text-green-600">
+                    <div className="text-sm text-black">
                       {plant.category}
                     </div>
                   </div>
@@ -306,7 +307,7 @@ export default function HerbalPlantExplorer() {
 
         {/* Draggable divider */}
         <div
-          className="h-2 bg-green-200 cursor-ns-resize flex items-center justify-center"
+          className="h-2 bg-black cursor-ns-resize flex items-center justify-center"
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
         >
