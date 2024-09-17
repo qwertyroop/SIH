@@ -10,6 +10,10 @@ import { Slider } from "@/components/ui/slider"
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { BananaPlant } from '@/components/Plants/banana'
+import dynamic from 'next/dynamic'
+import React from 'react'
+const Map = dynamic(() => import('../components/map/map'), { ssr: false });
+
 
 interface Plant {
   id: number;
@@ -168,7 +172,8 @@ export default function HerbalPlantExplorer() {
                     <h3 className="text-xl font-semibold mb-2 text-green-700">Native Habitat</h3>
                     <p className="text-green-600">{selectedPlant.nativeHabitat}</p>
                     <div className="mt-2 bg-green-50 h-40 flex items-center justify-center rounded-md border border-green-200">
-                      <p className="text-green-500">Map Placeholder</p>
+                      {/* <p className="text-green-500">Map</p> */}
+                      <Map />
                     </div>
                   </div>
                 </div>
