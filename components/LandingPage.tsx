@@ -92,7 +92,8 @@ export default function LandingPage() {
       {/* Hero Section */}
       <div className="relative mt-20 px-10 h-[70vh]">
         <Canvas shadows camera={{ position: [0, 15, 10], fov: 75 }}>
-          <ambientLight />
+          <ambientLight intensity={1} />
+          <pointLight position={[10, 10, 10]} intensity={1} />
 
           <RotatingForest />
 
