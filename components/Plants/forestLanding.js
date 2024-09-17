@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export function Forest(props) {
-  const { nodes, materials } = useGLTF('/LP_Forest.glb')
+  const { nodes, materials } = useGLTF('/forest.glb')
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -39,4 +39,4 @@ export function Forest(props) {
   )
 }
 
-useGLTF.preload('/LP_Forest.glb')
+useGLTF.preload('/forest.glb')
