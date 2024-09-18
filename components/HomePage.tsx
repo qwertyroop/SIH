@@ -12,6 +12,7 @@ import {
   ChevronDown,
   ChevronUp,
   X,
+  Maximize2,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -31,6 +32,7 @@ const Map = dynamic(() => import("../components/map/map"), { ssr: false });
 
 interface Plant {
   id: number;
+  fetcher: string;
   name: string;
   botanicalName: string;
   commonNames: string;
@@ -46,6 +48,7 @@ interface Plant {
 const mockPlants: Plant[] = [
   {
     id: 1,
+    fetcher: "WithaniaSomnifera",
     name: "Withania Somnifera",
     botanicalName: "Withania somnifera",
     commonNames: "Ashwagandha, Indian ginseng",
@@ -66,6 +69,7 @@ const mockPlants: Plant[] = [
   },
   {
     id: 2,
+    fetcher: "Thumba",
     name: "Thumba",
     botanicalName: "Leucas aspera",
     commonNames: "Thumba, Thumba plant",
@@ -85,6 +89,7 @@ const mockPlants: Plant[] = [
   },
   {
     id: 3,
+    fetcher: "Poovarshu",
     name: "Poovarshu",
     botanicalName: "Melia dubia",
     commonNames: "Malai Vembu, Poovarasu",
@@ -104,6 +109,7 @@ const mockPlants: Plant[] = [
   },
   {
     id: 4,
+    fetcher: "LantanaBloussum",
     name: "Lantana Bloussum",
     botanicalName: "Lantana camara",
     commonNames: "Wild sage, Lantana",
@@ -123,6 +129,7 @@ const mockPlants: Plant[] = [
   },
   {
     id: 5,
+    fetcher: "KingOfBitters",
     name: "King of Bitters",
     botanicalName: "Andrographis paniculata",
     commonNames: "Kalmegh",
@@ -143,6 +150,7 @@ const mockPlants: Plant[] = [
   },
   {
     id: 6,
+    fetcher: "Fatboi",
     name: "Fatboi",
     botanicalName: "Opuntia ficus-indica",
     commonNames: "Prickly pear, Nopal",
@@ -163,6 +171,7 @@ const mockPlants: Plant[] = [
   },
   {
     id: 7,
+    fetcher: "Basil",
     name: "Basil",
     botanicalName: "Ocimum basilicum",
     commonNames: "Sweet basil, Thai basil",
@@ -183,6 +192,7 @@ const mockPlants: Plant[] = [
   },
   {
     id: 8,
+    fetcher: "Bacopa",
     name: "Bacopa",
     botanicalName: "Bacopa monnieri",
     commonNames: "Water hyssop",
@@ -203,6 +213,7 @@ const mockPlants: Plant[] = [
   },
   {
     id: 9,
+    fetcher: "Oak",
     name: "Oak",
     botanicalName: "Quercus spp.",
     commonNames: "Red oak, White oak, Live oak",
@@ -223,6 +234,7 @@ const mockPlants: Plant[] = [
   },
   {
     id: 10,
+    fetcher: "Tulsi",
     name: "Tulsi",
     botanicalName: "Ocimum tenuiflorum",
     commonNames: "Holy basil",
@@ -243,6 +255,7 @@ const mockPlants: Plant[] = [
   },
   {
     id: 11,
+    fetcher: "Pine",
     name: "Pine",
     botanicalName: "Pinus spp.",
     commonNames: "Scots pine, Lodgepole pine, White pine",
@@ -263,6 +276,7 @@ const mockPlants: Plant[] = [
   },
   {
     id: 12,
+    fetcher: "AloeVera",
     name: "Aloe Vera",
     botanicalName: "Aloe barbadensis miller",
     commonNames: "None",
@@ -283,6 +297,7 @@ const mockPlants: Plant[] = [
   },
   {
     id: 13,
+    fetcher: "Banana",
     name: "Banana",
     botanicalName: "Musa acuminata",
     commonNames: "Plantain, Cavendish",
@@ -295,8 +310,8 @@ const mockPlants: Plant[] = [
     medicinalUsage:
       "Used in traditional medicine for digestive issues and skin health (limited evidence)",
     images: [
-      "https://unsplash.com/photos/image-of-banana-plant",
-      "https://unsplash.com/photos/image-of-ripe-banana",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG6RT-2304KflxgbST0Zxk0e_F7JLSQ-abXQ&s",
+      "https://www.bhg.com/thmb/y3MKc0c8Lv9AXJAsK7KcuoDRy24=/1500x0/filters:no_upscale():strip_icc()/indoor-banana-plant-615d519579014b9db8f32b704d46b849.jpg",
       "https://unsplash.com/photos/image-of-banana-peel",
     ],
     tag: ["digestive health", "skin health"],
@@ -305,12 +320,12 @@ const mockPlants: Plant[] = [
 
 const plantComponents: { [key: string]: React.ComponentType<React.ComponentProps<typeof Plants.BananaPlant>> } = {
   Banana: Plants.BananaPlant,
-  Alovera: Plants.AloveraPlant,
+  AloeVera: Plants.AloeveraPlant,
   Pine: Plants.PinePlant,
   Tulsi: Plants.TulsiPlant,
   Oak: Plants.Oak,
   Bacopa: Plants.Bacopa,
-  Basill: Plants.Basill,
+  Basil: Plants.Basil,
   Fatboi: Plants.Fatboi,
   KingOfBitters: Plants.KingOfBitters,
   LantanaBloussum: Plants.LantanaBloussum,
@@ -356,37 +371,19 @@ export default function HerbalPlantExplorer() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [zoom, setZoom] = useState(1);
   const [rotation, setRotation] = useState(0);
-  const [modelViewHeight, setModelViewHeight] = useState(50);
-  const [isDragging, setIsDragging] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isTagsVisible, setIsTagsVisible] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const allTags = Array.from(new Set(mockPlants.flatMap((plant) => plant.tag)));
 
   const filteredPlants = mockPlants.filter(
     (plant) =>
-      (plant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (plant.fetcher.toLowerCase().includes(searchTerm.toLowerCase()) ||
         plant.category.toLowerCase().includes(searchTerm.toLowerCase())) &&
       (selectedTags.length === 0 ||
         selectedTags.some((tag) => plant.tag.includes(tag)))
   );
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (isDragging) {
-      const containerHeight = window.innerHeight;
-      const newHeight = (e.clientY / containerHeight) * 100;
-      setModelViewHeight(Math.min(Math.max(newHeight, 20), 80));
-    }
-  };
 
   const toggleTag = (tag: string) => {
     setSelectedTags((prev) =>
@@ -394,26 +391,8 @@ export default function HerbalPlantExplorer() {
     );
   };
 
-  useEffect(() => {
-    const handleGlobalMouseUp = () => setIsDragging(false);
-    const handleGlobalMouseMove = (e: MouseEvent) => {
-      if (isDragging) {
-        const containerHeight = window.innerHeight;
-        const newHeight = (e.clientY / containerHeight) * 100;
-        setModelViewHeight(Math.min(Math.max(newHeight, 20), 80));
-      }
-    };
-    window.addEventListener("mouseup", handleGlobalMouseUp);
-    window.addEventListener("mousemove", handleGlobalMouseMove);
-    return () => {
-      window.removeEventListener("mouseup", handleGlobalMouseUp);
-      window.removeEventListener("mousemove", handleGlobalMouseMove);
-    };
-  }, [isDragging]);
-
   return (
     <div className="flex flex-col md:flex-row h-screen bg-white text-black overflow-hidden">
-      {/* Mobile Header */}
       <div className="md:hidden flex items-center justify-between p-4 bg-green-100">
         <Link
           href="/"
@@ -435,7 +414,6 @@ export default function HerbalPlantExplorer() {
         </Button>
       </div>
 
-      {/* Sidebar */}
       <div
         className={`w-full md:w-1/4 bg-white shadow-lg overflow-hidden flex flex-col ${
           isSidebarOpen ? "fixed inset-0 z-50" : "hidden md:flex"
@@ -498,7 +476,7 @@ export default function HerbalPlantExplorer() {
                 className={`w-full text-left p-3 rounded-lg mb-2 transition-colors flex items-center
                             ${
                               selectedPlant?.id === plant.id
-                                ? "bg-white text-black"
+                                ? "bg-green-200 text-black"
                                 : "hover:bg-green-200 text-black"
                             }`}
                 onClick={() => {
@@ -516,78 +494,70 @@ export default function HerbalPlantExplorer() {
         </ScrollArea>
       </div>
 
-      {/* Main Content Area */}
       <div className="w-full md:w-3/4 flex flex-col relative">
-        {/* Upper half for 3D model view */}
-        <div
-          className="border-b border-green-200 flex flex-col items-center justify-center relative rounded-xl m-2"
-          style={{ height: `${modelViewHeight}%`, minHeight: "300px" }}
-        >
-          <Canvas className="rounded-xl mt-2">
-            <PerspectiveCamera makeDefault position={[0, 0, 5]} />
-            <OrbitControls />
-            <Environment preset="forest" background />
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} intensity={1} />
-            {selectedPlant && (
-              <PlantModel
-                plantName={selectedPlant.name}
-                zoom={zoom}
-                rotation={rotation}
+        <ScrollArea className="flex-grow">
+          <div
+            className="border-b border-green-200 flex flex-col items-center justify-center relative rounded-xl m-2"
+            style={{ height: "50vh", minHeight: "300px" }}
+          >
+            <Canvas className="rounded-xl mt-2">
+              <PerspectiveCamera makeDefault position={[0, 0, 5]} />
+              <OrbitControls />
+              <Environment preset="forest" background />
+              <ambientLight intensity={0.5} />
+              <pointLight position={[10, 10, 10]} intensity={1} />
+              {selectedPlant && (
+                <PlantModel
+                  plantName={selectedPlant.fetcher}
+                  zoom={zoom}
+                  rotation={rotation}
+                />
+              )}
+            </Canvas>
+            <div className="absolute bottom-4 left-4 right-4 flex justify-center space-x-4">
+              <Button
+                variant="outline"
+                className="bg-white"
+                size="icon"
+                onClick={() => setZoom(Math.min(zoom + 0.1, 2))}
+              >
+                <ZoomIn className="h-4 w-4" />
+              </Button>
+              <Button
+                variant="outline"
+                className="bg-white"
+                size="icon"
+                onClick={() => setZoom(Math.max(zoom - 0.1, 0.5))}
+              >
+                <ZoomOut className="h-4 w-4" />
+              </Button>
+              <Slider
+                value={[rotation]}
+                onValueChange={([value]) => setRotation(value)}
+                max={10}
+                step={0.1}
+                className="w-32"
               />
-            )}
-          </Canvas>
-          <div className="absolute bottom-4 left-4 right-4 flex justify-center space-x-4">
+              <Button
+                variant="outline"
+                className="bg-white"
+                size="icon"
+                onClick={() => setRotation(0)}
+              >
+                <RotateCcw className="h-4 w-4" />
+              </Button>
+            </div>
             <Button
               variant="outline"
-              className="bg-white"
+              className="bg-white absolute top-4 right-4"
               size="icon"
-              onClick={() => setZoom(Math.min(zoom + 0.1, 2))}
+              onClick={() => setIsFullscreen(true)}
             >
-              <ZoomIn className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              className="bg-white"
-              size="icon"
-              onClick={() => setZoom(Math.max(zoom - 0.1, 0.5))}
-            >
-              <ZoomOut className="h-4 w-4" />
-            </Button>
-            <Slider
-              value={[rotation]}
-              onValueChange={([value]) => setRotation(value)}
-              max={10}
-              step={0.1}
-              className="w-32"
-            />
-            <Button
-              variant="outline"
-              className="bg-white"
-              size="icon"
-              onClick={() => setRotation(0)}
-            >
-              <RotateCcw className="h-4 w-4" />
+              <Maximize2 className="h-4 w-4" />
             </Button>
           </div>
-        </div>
 
-        {/* Draggable divider */}
-        <div
-          className="h-2 bg-white cursor-ns-resize flex items-center justify-center"
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          onMouseMove={handleMouseMove}
-        >
-          <div className="w-10 h-1 bg-black rounded-full"></div>
-        </div>
-
-        {/* Lower half for plant details and map */}
-        <ScrollArea
-          className="bg-white flex-grow p-4 md:p-10"
-          style={{ height: `calc(${100 - modelViewHeight}% - 0.5rem)` }}
-        >
-          <div className="p-2 md:p-6">
+          <div className="bg-white p-4 md:p-10">
             {selectedPlant ? (
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold mb-4 text-green-800">
@@ -640,7 +610,7 @@ export default function HerbalPlantExplorer() {
                     Native Habitat Map
                   </h3>
                   <div className="w-full h-64 md:h-96 rounded-md border border-green-200 overflow-hidden">
-                    <Map selectedPlant={selectedPlant.name} />{" "}
+                    <Map selectedPlant={selectedPlant.fetcher} />
                   </div>
                 </div>
                 <div className="mt-6">
@@ -668,6 +638,33 @@ export default function HerbalPlantExplorer() {
           </div>
         </ScrollArea>
       </div>
+
+      {isFullscreen && (
+        <div className="fixed inset-0 z-50 bg-white p-4">
+          <Button
+            variant="outline"
+            className="absolute top-4 right-4 z-10"
+            size="icon"
+            onClick={() => setIsFullscreen(false)}
+          >
+            <X className="h-4 w-4" />
+          </Button>
+          <Canvas className="w-full h-full">
+            <PerspectiveCamera makeDefault position={[0, 0, 5]} />
+            <OrbitControls />
+            <Environment preset="forest" background />
+            <ambientLight intensity={0.5} />
+            <pointLight position={[10, 10, 10]} intensity={1} />
+            {selectedPlant && (
+              <PlantModel
+                plantName={selectedPlant.fetcher}
+                zoom={zoom}
+                rotation={rotation}
+              />
+            )}
+          </Canvas>
+        </div>
+      )}
     </div>
   );
 }

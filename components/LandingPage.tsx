@@ -58,9 +58,7 @@ export default function LandingPage() {
               AYUSH
             </a>
           </nav>
-          <button className="bg-[#508023] text-white px-4 py-2 rounded-md hover:bg-[#27450b] transition-colors">
-            Login
-          </button>
+          
         </div>
       </header>
 
