@@ -1,20 +1,14 @@
 "use client";
 import React, { useState, useRef } from "react";
 import {
-  Search,
-  Book,
-  ChevronDown,
-  Monitor,
-  Headset,
+  
   MapPin,
   Leaf,
   Pill,
   Video,
 } from "lucide-react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, OrbitControls, Sky } from "@react-three/drei";
 import * as THREE from "three";
-import Link from "next/link";
 import Image from "next/image";
 import { FlipWordsDemo } from "./hero-words";
 import { FloatingDockDemo } from "@/components/dock";
@@ -169,7 +163,7 @@ export default function LandingPage() {
           <p className="max-w-xl opacity-70 mb-4">
             {tabContent[activeTab].description}
           </p>
-          <img
+          <Image
             src={tabContent[activeTab].image}
             alt={tabContent[activeTab].title}
             className="w-full h-64 object-cover rounded-xl"

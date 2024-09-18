@@ -3,11 +3,8 @@ import { FloatingDock } from "@/components/ui/floating-dock";
 import {
     IconWorldWww,
     IconCardboardsFilled,
-  IconHome,
-  
-  IconTerminal2,
+ 
 } from "@tabler/icons-react";
-import Image from "next/image";
 
 export function FloatingDockDemo() {
   const links = [

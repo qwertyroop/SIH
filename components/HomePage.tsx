@@ -303,7 +303,7 @@ const mockPlants: Plant[] = [
   },
 ];
 
-const plantComponents: { [key: string]: React.ComponentType<any> } = {
+const plantComponents: { [key: string]: React.ComponentType<React.ComponentProps<typeof Plants.BananaPlant>> } = {
   Banana: Plants.BananaPlant,
   Alovera: Plants.AloveraPlant,
   Pine: Plants.PinePlant,
