@@ -1,14 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
-import {
-  
-  MapPin,
-  Leaf,
-  Pill,
-  Video,
-} from "lucide-react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import * as THREE from "three";
+import { MapPin, Leaf, Pill, Video } from "lucide-react";
 import Image from "next/image";
 import { FlipWordsDemo } from "./hero-words";
 import { FloatingDockDemo } from "@/components/dock";
@@ -53,10 +45,7 @@ export default function LandingPage() {
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center">
-            
-            <span className="text-5xl font-semibold text-[#345019]">
-              O
-            </span>
+            <span className="text-5xl font-semibold text-[#345019]">O</span>
           </div>
           <nav className="hidden md:flex gap-8 ml-12">
             <a href="#" className="text-gray-500 hover:text-gray-900">
@@ -68,7 +57,6 @@ export default function LandingPage() {
             <a href="#" className="text-gray-500 hover:text-gray-900">
               AYUSH
             </a>
-           
           </nav>
           <button className="bg-[#508023] text-white px-4 py-2 rounded-md hover:bg-[#27450b] transition-colors">
             Login
@@ -79,8 +67,6 @@ export default function LandingPage() {
       {/* Hero Section */}
       <main className=" mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="relative rounded-lg overflow-hidden mb-4 ">
-          
-
           <p className="text-[#508023] text-center font-bold text-2xl -mb-8">
             AYUSH
           </p>
@@ -101,42 +87,42 @@ export default function LandingPage() {
         <FloatingDockDemo />
       </main>
       <h1 className="text-[3rem] sm:text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black  text-center">
-            FEATURES
-          </h1>
+        FEATURES
+      </h1>
       {/* Features Section */}
       <div className="mt-20 px-10">
         <h2 className="text-3xl font-bold mb-6">Explore Our Features</h2>
         <center>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6   text-black">
-          <div className="bg-[#86cf41] p-6 rounded-3xl">
-            <Leaf className="w-10 h-10 mb-4" />
-            <h3 className="text-xl font-bold mb-2">3D Plant Models</h3>
-            <p className="opacity-70">
-              Interact with detailed 3D models of medicinal plants.
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6   text-black">
+            <div className="bg-[#86cf41] p-6 rounded-3xl">
+              <Leaf className="w-10 h-10 mb-4" />
+              <h3 className="text-xl font-bold mb-2">3D Plant Models</h3>
+              <p className="opacity-70">
+                Interact with detailed 3D models of medicinal plants.
+              </p>
+            </div>
+            <div className="bg-[#86cf41] p-6 rounded-3xl">
+              <MapPin className="w-10 h-10 mb-4" />
+              <h3 className="text-xl font-bold mb-2">Map Integration</h3>
+              <p className="opacity-70">
+                Discover where each plant naturally grows and is cultivated.
+              </p>
+            </div>
+            <div className="bg-[#86cf41] p-6 rounded-3xl">
+              <Pill className="w-10 h-10 mb-4" />
+              <h3 className="text-xl font-bold mb-2">Medicinal Uses</h3>
+              <p className="opacity-70">
+                Learn about traditional and modern medicinal applications.
+              </p>
+            </div>
+            <div className="bg-[#508023] p-6 rounded-3xl text-white">
+              <Video className="w-10 h-10 mb-4" />
+              <h3 className="text-xl font-bold mb-2">Video & Audio Library</h3>
+              <p className="opacity-70">
+                Learn about herbal plants with audio and video tutorials.
+              </p>
+            </div>
           </div>
-          <div className="bg-[#86cf41] p-6 rounded-3xl">
-            <MapPin className="w-10 h-10 mb-4" />
-            <h3 className="text-xl font-bold mb-2">Map Integration</h3>
-            <p className="opacity-70">
-              Discover where each plant naturally grows and is cultivated.
-            </p>
-          </div>
-          <div className="bg-[#86cf41] p-6 rounded-3xl">
-            <Pill className="w-10 h-10 mb-4" />
-            <h3 className="text-xl font-bold mb-2">Medicinal Uses</h3>
-            <p className="opacity-70">
-              Learn about traditional and modern medicinal applications.
-            </p>
-          </div>
-          <div className="bg-[#508023] p-6 rounded-3xl text-white">
-            <Video className="w-10 h-10 mb-4" />
-            <h3 className="text-xl font-bold mb-2">Video & Audio Library</h3>
-            <p className="opacity-70">
-              Learn about herbal plants with audio and video tutorials.
-            </p>
-          </div>
-        </div>
         </center>
       </div>
 
@@ -167,6 +153,8 @@ export default function LandingPage() {
             src={tabContent[activeTab].image}
             alt={tabContent[activeTab].title}
             className="w-full h-64 object-cover rounded-xl"
+            width={1000}
+            height={800}
           />
         </div>
       </div>
@@ -246,14 +234,4 @@ export default function LandingPage() {
   );
 }
 
-function RotatingForest() {
-  const forestRef = useRef<THREE.Group>(null);
 
-  useFrame(() => {
-    if (forestRef.current) {
-      forestRef.current.rotation.y += 0.001; // Slow rotation
-    }
-  });
-
-  return <group ref={forestRef}></group>;
-}
