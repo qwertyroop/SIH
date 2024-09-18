@@ -21,7 +21,7 @@ export function FloatingDockDemo() {
       icon: (
         <IconCardboardsFilled className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      href: "/vr",
+      href: "https://webxr-samples-main-57hzhxsae.vercel.app/",
     },
    
   ];
