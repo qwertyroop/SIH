@@ -9,6 +9,7 @@ import {
   MapPin,
   Leaf,
   Pill,
+  Video,
 } from "lucide-react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, OrbitControls, Sky } from "@react-three/drei";
@@ -58,42 +59,25 @@ export default function LandingPage() {
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center">
-            <Image
-              src="/placeholder.svg?height=40&width=40"
-              alt="IsoEnergy Logo"
-              width={40}
-              height={40}
-              className="mr-2"
-            />
-            <span className="text-xl font-semibold text-gray-900">
-              isoEnergy
+            
+            <span className="text-5xl font-semibold text-[#345019]">
+              O
             </span>
           </div>
-          <nav className="hidden md:flex space-x-6">
+          <nav className="hidden md:flex gap-8 ml-12">
             <a href="#" className="text-gray-500 hover:text-gray-900">
               Home
             </a>
             <a href="#" className="text-gray-500 hover:text-gray-900">
-              Energy System
+              About
             </a>
             <a href="#" className="text-gray-500 hover:text-gray-900">
-              Topics
+              AYUSH
             </a>
-            <a href="#" className="text-gray-500 hover:text-gray-900">
-              Countries
-            </a>
-            <a href="#" className="text-gray-500 hover:text-gray-900">
-              Data
-            </a>
-            <a href="#" className="text-gray-500 hover:text-gray-900">
-              Reports
-            </a>
-            <a href="#" className="text-gray-500 hover:text-gray-900">
-              Contact
-            </a>
+           
           </nav>
-          <button className="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 transition-colors">
-            Subscribe
+          <button className="bg-[#508023] text-white px-4 py-2 rounded-md hover:bg-[#27450b] transition-colors">
+            Login
           </button>
         </div>
       </header>
@@ -116,41 +100,50 @@ export default function LandingPage() {
               alt="Bio Energy Landscape"
               width={1000}
               height={800}
-              className="w-1/2 z-50"
+              className="md:w-1/2 w-full mt-10 md:mt-5"
             />
           </center>
         </div>
         <FloatingDockDemo />
       </main>
-      <h1 className="text-[5rem] font-bold text-black  text-center">
+      <h1 className="text-[3rem] sm:text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black  text-center">
             FEATURES
           </h1>
       {/* Features Section */}
       <div className="mt-20 px-10">
         <h2 className="text-3xl font-bold mb-6">Explore Our Features</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-[#2a3e2e] p-6 rounded-3xl">
+        <center>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6   text-black">
+          <div className="bg-[#86cf41] p-6 rounded-3xl">
             <Leaf className="w-10 h-10 mb-4" />
             <h3 className="text-xl font-bold mb-2">3D Plant Models</h3>
             <p className="opacity-70">
               Interact with detailed 3D models of medicinal plants.
             </p>
           </div>
-          <div className="bg-[#2a3e2e] p-6 rounded-3xl">
+          <div className="bg-[#86cf41] p-6 rounded-3xl">
             <MapPin className="w-10 h-10 mb-4" />
             <h3 className="text-xl font-bold mb-2">Map Integration</h3>
             <p className="opacity-70">
               Discover where each plant naturally grows and is cultivated.
             </p>
           </div>
-          <div className="bg-[#2a3e2e] p-6 rounded-3xl">
+          <div className="bg-[#86cf41] p-6 rounded-3xl">
             <Pill className="w-10 h-10 mb-4" />
             <h3 className="text-xl font-bold mb-2">Medicinal Uses</h3>
             <p className="opacity-70">
               Learn about traditional and modern medicinal applications.
             </p>
           </div>
+          <div className="bg-[#508023] p-6 rounded-3xl text-white">
+            <Video className="w-10 h-10 mb-4" />
+            <h3 className="text-xl font-bold mb-2">Video & Audio Library</h3>
+            <p className="opacity-70">
+              Learn about herbal plants with audio and video tutorials.
+            </p>
+          </div>
         </div>
+        </center>
       </div>
 
       {/* Content Tabs */}

@@ -526,7 +526,7 @@ export function Thumba(props) {
 
 
 export function WithaniaSomnifera(props) {
-    const { nodes, materials } = useGLTF('/Withania_Somnifera_.glb')
+    const { nodes, materials } = useGLTF('/WS.glb')
     return (
         <group {...props} dispose={null}>
             <group position={[0.497, -0.313, 0.587]} rotation={[-Math.PI / 2, 0, 0]}>
@@ -566,7 +566,7 @@ export function WithaniaSomnifera(props) {
     )
 }
 
-useGLTF.preload('/Withania_Somnifera_.glb')
+useGLTF.preload('/WS.glb')
 
 useGLTF.preload('/Thumba_.glb')
 
